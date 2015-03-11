@@ -65,12 +65,20 @@ class RequestData
         $this->protocolVersion = $version;
     }
 
+    private function getRequestUrl()
+    {
+        // TODO:
+        return $this->url;
+
+        return $this->getPath();
+    }
+
     public function __toString()
     {
         $headers = $this->mergeDefaultheaders($this->headers);
 
         $data = '';
-        $data .= "{$this->method} {$this->getPath()} HTTP/{$this->protocolVersion}\r\n";
+        $data .= "{$this->method} {$this->getRequestUrl()} HTTP/{$this->protocolVersion}\r\n";
         foreach ($headers as $name => $value) {
             $data .= "$name: $value\r\n";
         }
